@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccountResDto {
+	private String loginId;
 	private String nickname;
 
 	@Builder
 	public AccountResDto(Account account) {
+		this.loginId = account.getLoginId();
 		this.nickname = account.getNickname();
 	}
 }

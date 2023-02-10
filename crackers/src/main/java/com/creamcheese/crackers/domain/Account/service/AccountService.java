@@ -22,11 +22,11 @@ public class AccountService {
 	//private final BCryptPasswordEncoder passwordEncoder;
 
 
-/*	@Transactional //TODO:readOnly 적용
-	public Account findById(UUID id) {
+	@Transactional //TODO:readOnly 적용
+	public Account findById(Integer id) {
 		return accountRepository.findById(id)
 				.orElseThrow(AccountNotFoundException::new);
-	}*/
+	}
 
 	@Transactional//TODO:readOnly 적용
 	public boolean isExistedLoginId(String loginId){

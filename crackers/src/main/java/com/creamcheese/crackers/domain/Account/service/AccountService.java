@@ -1,7 +1,6 @@
 package com.creamcheese.crackers.domain.Account.service;
 
-import com.creamcheese.crackers.domain.Account.domain.Account;
-import com.creamcheese.crackers.domain.Account.dto.AccountUpdateReqDto;
+import com.creamcheese.crackers.domain.Account.entity.Account;
 import com.creamcheese.crackers.domain.Account.dto.SignUpReqDto;
 import com.creamcheese.crackers.domain.Account.repository.AccountRepository;
 import com.creamcheese.crackers.global.exception.CustomException.AccountNotFoundException;
@@ -10,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.UUID;
 
 @Slf4j
 @Service

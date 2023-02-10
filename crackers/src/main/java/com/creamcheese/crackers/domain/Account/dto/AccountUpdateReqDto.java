@@ -1,6 +1,6 @@
 package com.creamcheese.crackers.domain.Account.dto;
 
-import com.creamcheese.crackers.domain.Account.domain.Account;
+import com.creamcheese.crackers.domain.Account.entity.Account;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

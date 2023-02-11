@@ -30,6 +30,9 @@ public class Account {
 	@NotNull(message = "비밀번호는 필수입니다.")
 	private String encodedPassword;
 
+	@OneToMany(mappedBy = "account")
+	private List<Workspace>  workspaces = new ArrayList<>();
+
 	@Builder
 	public Account(String loginId, String nickname, String encodedPassword) {
 		this.loginId = loginId;

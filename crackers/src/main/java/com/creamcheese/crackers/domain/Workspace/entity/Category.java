@@ -18,7 +18,7 @@ public class Category {
 	@Column(name = "category_id", updatable = false)
 	private Integer id;
 
-	@ManyToOne
+	@ManyToOne //TODO : 카테고리에서 근무지를 호출하는 일이 없으므로 양방향에서 단방향으로 변경 논의 필요
 	@JoinColumn(name = "workspace_id")
 	private Workspace workspace;
 

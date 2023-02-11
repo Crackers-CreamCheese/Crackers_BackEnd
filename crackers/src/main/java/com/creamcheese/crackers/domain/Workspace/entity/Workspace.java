@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,11 +25,13 @@ public class Workspace {
 	@JoinColumn(name = "account_id")
 	private Account account;
 
-	@OneToMany(mappedBy = "workspace")
+	@ManyToOne
+	@JoinColumn(name = "category_id")
 	private Category category;
 
 	@OneToMany(mappedBy = "workspace")
-	private Schedule schedule;
+	private List<Schedule> schedules = new ArrayList<>();
+
 
 	@NotNull(message = "시급을 입력해주세요")
 	private Integer wage = 9160;

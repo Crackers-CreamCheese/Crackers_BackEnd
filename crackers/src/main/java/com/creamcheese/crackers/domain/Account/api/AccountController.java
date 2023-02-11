@@ -1,8 +1,7 @@
 package com.creamcheese.crackers.domain.Account.api;
 
-import com.creamcheese.crackers.domain.Account.domain.Account;
+import com.creamcheese.crackers.domain.Account.entity.Account;
 import com.creamcheese.crackers.domain.Account.dto.AccountResDto;
-import com.creamcheese.crackers.domain.Account.dto.AccountUpdateReqDto;
 import com.creamcheese.crackers.domain.Account.dto.SignUpReqDto;
 import com.creamcheese.crackers.domain.Account.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @Slf4j
 @RestController

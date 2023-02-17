@@ -1,8 +1,7 @@
 package com.creamcheese.crackers.domain.Account.api;
 
+import com.creamcheese.crackers.domain.Account.dto.*;
 import com.creamcheese.crackers.domain.Account.entity.Account;
-import com.creamcheese.crackers.domain.Account.dto.AccountResDto;
-import com.creamcheese.crackers.domain.Account.dto.SignUpReqDto;
 import com.creamcheese.crackers.domain.Account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static com.creamcheese.crackers.global.constant.ResponseConstant.WITHDRAW_SUCCESS;
 
 @Slf4j
 @RestController
@@ -28,12 +29,31 @@ public class AccountController {
 				.body(new AccountResDto(findAccount));
 	}
 
-/*	@PatchMapping("/update")// 이메일은 변경 불가능, 비번과 닉네임 변경만
-	public ResponseEntity<AccountResDto>  update(@RequestBody @Valid final AccountUpdateReqDto requestDto) {
-		//로그인된 사람의 정보를 가져와 id로 반환, @AuthUser
-		//Intger id = accountService.update(id, requestDto);
-		//Account findAccount = accountService.findById(id);
+	@PatchMapping("/profile")
+	public ResponseEntity<AccountResDto> update(@RequestBody @Valid final AccountUpdateReqDto requestDto) {
+		//TODO: 토큰을 통해 로그인된 사람의 정보를 가져와 id로 반환, @AuthUser
+		Integer id = accountService.update(requestDto);
+		Account findAccount = accountService.findById(id);
 		return ResponseEntity.ok()
 				.body(new AccountResDto(findAccount));
-	}*/
+	}
+
+	@PatchMapping("/withdraw")
+	public ResponseEntity<String> withdraw(@RequestBody @Valid final WithdrawReqDto requestDto)
+	{//TODO:토큰을 통해 로그인된 사람의 정보를 가져와 id로 반환, @AuthUser 필요
+		accountService.withdraw(requestDto);
+		return ResponseEntity.ok()
+				.body(WITHDRAW_SUCCESS);
+
+	}
+
+	@PostMapping("/signin")
+	public ResponseEntity<AccountResDto> signIn(@RequestBody @Valid final SignInReqDto requestDto)
+	{
+		Account findAccount = accountService.signIn(requestDto);
+		return ResponseEntity.ok()
+				.body(new AccountResDto(findAccount));
+	}
+
+
 }

@@ -1,6 +1,7 @@
 package com.creamcheese.crackers.global.exception;
 
-import com.creamcheese.crackers.global.exception.CustomException.EmailDuplicateException;
+import com.creamcheese.crackers.global.exception.CustomException.LoginIdDuplicateException;
+import com.creamcheese.crackers.global.exception.CustomException.PasswordNotMatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,13 +62,18 @@ public class GlobalExceptionHandler {
 
 
 	/*================== User Exception ==================*/
-	@ExceptionHandler(EmailDuplicateException.class)
-	protected final ResponseEntity<ErrorResponse> handleEmailDuplicateException(EmailDuplicateException e) {
-		return ErrorResponse.toErrorResponseEntity(ErrorCode.EMAIL_DUPLICATE, e.getMessage());
+	@ExceptionHandler(LoginIdDuplicateException.class)
+	protected final ResponseEntity<ErrorResponse> handleLoginIdDuplicateException(LoginIdDuplicateException e) {
+		return ErrorResponse.toErrorResponseEntity(ErrorCode.LOGINID_DUPLICATE, e.getMessage());
 	}
 	// 존재하지 않는 유저
 	@ExceptionHandler(AccountNotFoundException.class)
 	protected final ResponseEntity<ErrorResponse> handleUserNotFoundException(AccountNotFoundException e) {
 		return ErrorResponse.toErrorResponseEntity(ErrorCode.ACCOUNT_NOT_FOUND, e.getMessage());
+	}
+
+	@ExceptionHandler(PasswordNotMatchException.class)
+	protected final ResponseEntity<ErrorResponse> handlePasswordNotMatchException(PasswordNotMatchException e) {
+		return ErrorResponse.toErrorResponseEntity(ErrorCode.PASSWORD_NOT_MATCH, e.getMessage());
 	}
 }

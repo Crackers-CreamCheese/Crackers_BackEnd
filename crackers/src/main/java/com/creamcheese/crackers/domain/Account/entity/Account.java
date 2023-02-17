@@ -1,14 +1,23 @@
-package com.creamcheese.crackers.domain.Account.domain;
+package com.creamcheese.crackers.domain.Account.entity;
 
+import com.creamcheese.crackers.domain.Workspace.entity.Workspace;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.creamcheese.crackers.domain.Account.entity.AccountStatus.REGISTERED;
+import static com.creamcheese.crackers.domain.Account.entity.AccountStatus.UNREGISTERED;
 
 @Entity
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Account {
@@ -16,10 +25,9 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id", updatable = false)
-	private Integer id;
+	private Integer accountId;
 
-
-	@NotNull(message = "아이디은 필수입니다.")
+	@NotNull(message = "아이디는 필수입니다.")
 	private String loginId;
 
 	@NotNull(message = "닉네임은 필수입니다. ")
@@ -27,6 +35,13 @@ public class Account {
 
 	@NotNull(message = "비밀번호는 필수입니다.")
 	private String encodedPassword;
+
+	@OneToMany(mappedBy = "account")
+	private List<Workspace>  workspaces = new ArrayList<>();
+
+	@Enumerated(EnumType.STRING)
+	@ColumnDefault("'REGISTERED'")
+	private AccountStatus status;
 
 	@Builder
 	public Account(String loginId, String nickname, String encodedPassword) {
@@ -38,4 +53,9 @@ public class Account {
 	public void updateAccount(String nickname){
 		this.nickname = nickname;
 	}
+
+	public void withdrawAccount(){
+		this.status = UNREGISTERED;
+	}
+
 }

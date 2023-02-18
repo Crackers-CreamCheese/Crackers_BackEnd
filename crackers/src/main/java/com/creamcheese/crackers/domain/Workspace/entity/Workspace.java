@@ -3,6 +3,7 @@ package com.creamcheese.crackers.domain.Workspace.entity;
 
 import com.creamcheese.crackers.domain.Account.entity.Account;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,7 +30,7 @@ public class Workspace {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@OneToMany(mappedBy = "workspace")
+	@OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Schedule> schedules = new ArrayList<>();
 
 
@@ -38,5 +39,29 @@ public class Workspace {
 
 	@NotNull(message = "근무지 이름을 입력해주세요.")
 	private String name;
+
+	@Builder
+	public Workspace(Integer id, Account account, Category category, Integer wage, String name) {
+		this.id = id;
+		this.account = account;
+		this.category = category;
+		this.wage = wage;
+		this.name = name;
+	}
+
+	public void update(List<Schedule> scheduleList, Integer wage, String name) {
+		this.schedules.clear();
+		for (Schedule schedule : scheduleList) {
+			schedules.add(schedule);
+		}
+		this.wage = wage;
+		this.name = name;
+	}
+
+	public void addSchedule(Schedule schedule) {
+		schedules.add(schedule);
+		schedule.setWorkspace(this);
+	}
+
 
 }

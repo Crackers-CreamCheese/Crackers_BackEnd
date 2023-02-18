@@ -32,9 +32,14 @@ public class Schedule {
 	private Integer endTime;
 
 	@Builder
-	public Schedule(String day, Integer startTime, Integer endTime) {
+	public Schedule(Workspace workspace, String day, Integer startTime, Integer endTime) {
+		this.workspace = workspace;
 		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
+	}
+
+	public void setWorkspace(Workspace workspace) {
+		this.workspace = workspace;
 	}
 }

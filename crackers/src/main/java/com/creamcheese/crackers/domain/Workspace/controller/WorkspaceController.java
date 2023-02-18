@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,6 +31,12 @@ public class WorkspaceController {
 		return ResponseEntity.ok()
 				.body(new WorkspaceResDto(workspace));
 	}
+	@GetMapping
+	public ResponseEntity<List<WorkspaceResDto>> search(@RequestParam String loginId) {
+		List<WorkspaceResDto> workspaceResDtos = workspaceService.search(loginId);
+		return ResponseEntity.ok()
+				.body(workspaceResDtos);
+	}
 
 	@PatchMapping("/update")
 	public ResponseEntity<WorkspaceResDto> update(@RequestBody final WorkspaceUpdateReqDto requestDto)
@@ -40,6 +47,6 @@ public class WorkspaceController {
 
 	}
 
-	//TODO: 조회
+
 
 }

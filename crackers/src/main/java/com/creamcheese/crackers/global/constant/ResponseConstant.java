@@ -29,4 +29,6 @@ public class ResponseConstant {
 	public static final String BEFORE_PASSWORD_NOT_MATCH = "현재 비밀번호가 일치하지 않습니다.";
 
 	public static final String CERTIFICATION_CODE_NOT_MATCH = "인증 코드가 일치하지 않습니다.";
+	public static final String WORKSPACE_NOT_FOUND = "근무지를 찾을 수 없습니다.";
+
 }

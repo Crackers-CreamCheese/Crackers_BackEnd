@@ -1,6 +1,7 @@
 package com.creamcheese.crackers.domain.Account.entity;
 
 import com.creamcheese.crackers.domain.Workspace.entity.Workspace;
+import com.creamcheese.crackers.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import static com.creamcheese.crackers.domain.Account.entity.AccountStatus.UNREG
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Account {
+public class Account extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +58,6 @@ public class Account {
 	public void withdrawAccount(){
 		this.status = UNREGISTERED;
 	}
+
 
 }

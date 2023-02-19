@@ -2,6 +2,7 @@ package com.creamcheese.crackers.domain.Workspace.entity;
 
 
 import com.creamcheese.crackers.domain.Account.entity.Account;
+import com.creamcheese.crackers.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Workspace {
+public class Workspace extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

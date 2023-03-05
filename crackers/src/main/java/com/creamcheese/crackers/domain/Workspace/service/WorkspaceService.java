@@ -2,7 +2,6 @@ package com.creamcheese.crackers.domain.Workspace.service;
 
 import com.creamcheese.crackers.domain.Account.entity.Account;
 import com.creamcheese.crackers.domain.Account.service.AccountService;
-import com.creamcheese.crackers.domain.Workspace.dto.ScheduleDto;
 import com.creamcheese.crackers.domain.Workspace.dto.WorkspaceReqDto;
 import com.creamcheese.crackers.domain.Workspace.dto.WorkspaceResDto;
 import com.creamcheese.crackers.domain.Workspace.dto.WorkspaceUpdateReqDto;
@@ -12,7 +11,6 @@ import com.creamcheese.crackers.domain.Workspace.entity.Workspace;
 import com.creamcheese.crackers.domain.Workspace.repository.CategoryRepository;
 import com.creamcheese.crackers.domain.Workspace.repository.ScheduleRepository;
 import com.creamcheese.crackers.domain.Workspace.repository.WorkspaceRepository;
-import com.creamcheese.crackers.global.exception.CustomException.AccountNotFoundException;
 import com.creamcheese.crackers.global.exception.CustomException.CategoryNotFoundException;
 import com.creamcheese.crackers.global.exception.CustomException.WorkspaceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +34,7 @@ public class WorkspaceService {
 
 
 	public Workspace create(WorkspaceReqDto requestDto) {
+
 		Account account = accountService.findByLoginId(requestDto.getLoginId());
 		Category category = findByCategoryId(requestDto.getCategoryId());
 		Workspace workspace = workspaceRepository.save(requestDto.toEntity(account, category));

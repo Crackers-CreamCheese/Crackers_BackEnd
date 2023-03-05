@@ -2,6 +2,8 @@ package com.creamcheese.crackers.global.exception;
 
 import com.creamcheese.crackers.global.exception.CustomException.LoginIdDuplicateException;
 import com.creamcheese.crackers.global.exception.CustomException.PasswordNotMatchException;
+import com.creamcheese.crackers.global.exception.CustomException.WorkHistoryNotFoundException;
+import com.creamcheese.crackers.global.exception.CustomException.WorkspaceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,5 +77,17 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(PasswordNotMatchException.class)
 	protected final ResponseEntity<ErrorResponse> handlePasswordNotMatchException(PasswordNotMatchException e) {
 		return ErrorResponse.toErrorResponseEntity(ErrorCode.PASSWORD_NOT_MATCH, e.getMessage());
+	}
+
+	/*================== WorkSpace Exception ==================*/
+	@ExceptionHandler(WorkspaceNotFoundException.class)
+	protected final ResponseEntity<ErrorResponse> handleWorkSpaceNotFoundException(WorkspaceNotFoundException e) {
+		return ErrorResponse.toErrorResponseEntity(ErrorCode.WORKSPACE_NOT_FOUND, e.getMessage());
+	}
+
+	/*================== WorkHistory Exception ==================*/
+	@ExceptionHandler(WorkHistoryNotFoundException.class)
+	protected final ResponseEntity<ErrorResponse> handleWorkHistoryNotFoundException(WorkHistoryNotFoundException e) {
+		return ErrorResponse.toErrorResponseEntity(ErrorCode.WORKHISTORY_NOT_FOUND, e.getMessage());
 	}
 }

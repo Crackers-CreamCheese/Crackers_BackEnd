@@ -7,7 +7,6 @@ public class ResponseConstant {
 	public static final String SEND_EMAIL_SUCCESS = "성공적으로 인증 코드를 전송했습니다.";
 	public static final String CERTIFICATION_SUCCESS = "성공적으로 인증되었습니다.";
 
-
 	// withdraw
 	public static final String WITHDRAW_SUCCESS = "성공적으로 탈퇴되었습니다.";
 	public static final String AVAILABLE_NICKNAME = "사용할 수 있는 닉네임입니다.";
@@ -30,5 +29,9 @@ public class ResponseConstant {
 
 	public static final String CERTIFICATION_CODE_NOT_MATCH = "인증 코드가 일치하지 않습니다.";
 	public static final String WORKSPACE_NOT_FOUND = "근무지를 찾을 수 없습니다.";
+	public static final String WORKHISTORY_NOT_FOUND = "근무 기록을 찾을 수 없습니다.";
 
+	// history
+	public static final String HISTORY_CREATE_SUCCESS = " 날짜의 근무 기록이 생성되었습니다.";
+	public static final String HISTORY_DELETE_SUCCESS = "근무 기록이 성공적으로 삭제되었습니다.";
 }

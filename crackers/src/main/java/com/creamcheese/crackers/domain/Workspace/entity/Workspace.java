@@ -34,6 +34,7 @@ public class Workspace extends BaseTimeEntity {
 	@OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Schedule> schedules = new ArrayList<>();
 
+
 	@NotNull(message = "시급을 입력해주세요")
 	private Integer wage = 9160;
 

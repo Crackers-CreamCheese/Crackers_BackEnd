@@ -11,6 +11,8 @@ public interface WorkspaceRepository extends JpaRepository<Workspace, Integer> {
 	@Override
 	Optional<Workspace> findById(Integer integer);
 
+	Optional<Workspace> findByName(String name);
+
 	List<Workspace> findByAccount(Account account);
 
 }

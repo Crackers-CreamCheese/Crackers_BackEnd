@@ -15,12 +15,12 @@ import static com.creamcheese.crackers.global.constant.ResponseConstant.WITHDRAW
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/accounts")
+@RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
 public class AccountController {
 	private final AccountService accountService;
 
-	@PostMapping
+	@PostMapping("/signup")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public ResponseEntity<AccountResDto> signUp(@RequestBody @Valid final SignUpReqDto requestDto) {
 		Integer id = accountService.signUp(requestDto);

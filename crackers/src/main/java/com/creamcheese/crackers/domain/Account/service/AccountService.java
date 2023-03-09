@@ -60,7 +60,7 @@ public class AccountService {
 		}
 		return account;
 	}
-	@Transactional // TODO: 아직 스프링 시큐리티 적용 전이며 적용 후에는 삭제 예정, 해당 함수는 임시 방편으로 있는 함수임
+	// TODO: 아직 스프링 시큐리티 적용 전이며 적용 후에는 삭제 예정, 해당 함수는 임시 방편으로 있는 함수임
 	public boolean checkPassword(Account account, String password) {
 		if (account.getEncodedPassword().equals(password)) {
 			return true;

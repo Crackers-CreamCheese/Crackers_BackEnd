@@ -12,8 +12,8 @@ import com.creamcheese.crackers.global.exception.CustomException.PasswordNotMatc
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -22,7 +22,6 @@ import javax.transaction.Transactional;
 public class AccountService {
 	private final AccountRepository accountRepository;
 
-	@Transactional
 	public Integer signUp(SignUpReqDto requestDto) {
 		if (isExistedLoginId(requestDto.getLoginId())) {
 			throw new LoginIdDuplicateException();
@@ -32,14 +31,12 @@ public class AccountService {
 		return account.getAccountId();
 	}
 
-	@Transactional
 	public Integer update(AccountUpdateReqDto requestDto) {
 		Account account = findByLoginId(requestDto.getLoginId());
 		account.updateAccount(requestDto.getNickname());
 		return account.getAccountId();
 	}
 
-	@Transactional
 	public void withdraw(WithdrawReqDto requestDto) {
 		Account account = findByLoginId(requestDto.getLoginId());
 		if (!checkPassword(account, requestDto.getPassword())) {
@@ -48,14 +45,14 @@ public class AccountService {
 		account.withdrawAccount();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public boolean isExistedLoginId(String loginId) {
 		return accountRepository.existsByLoginId(loginId);
 	}
 
 	/*----------Auth관련 -----*/
 
-	@Transactional
+
 	public Account signIn(SignInReqDto requestDto) {
 		Account account = findByLoginId(requestDto.getLoginId());
 		if (!checkPassword(account, requestDto.getPassword())) {
@@ -63,21 +60,7 @@ public class AccountService {
 		}
 		return account;
 	}
-
-	/* repository 관련 */
-	@Transactional //TODO:readOnly 적
-	public Account findById(Integer id) {
-		return accountRepository.findById(id)
-				.orElseThrow(AccountNotFoundException::new);
-	}
-
-	@Transactional
-	public Account findByLoginId(String loginId) {
-		return accountRepository.findByLoginId(loginId)
-				.orElseThrow(AccountNotFoundException::new);
-	}
-
-	@Transactional
+	@Transactional // TODO: 아직 스프링 시큐리티 적용 전이며 적용 후에는 삭제 예정, 해당 함수는 임시 방편으로 있는 함수임
 	public boolean checkPassword(Account account, String password) {
 		if (account.getEncodedPassword().equals(password)) {
 			return true;
@@ -86,6 +69,19 @@ public class AccountService {
 		}
 
 	}
+
+	@Transactional(readOnly = true)
+	public Account findById(Integer id) {
+		return accountRepository.findById(id)
+				.orElseThrow(AccountNotFoundException::new);
+	}
+
+	@Transactional(readOnly = true)
+	public Account findByLoginId(String loginId) {
+		return accountRepository.findByLoginId(loginId)
+				.orElseThrow(AccountNotFoundException::new);
+	}
+
 
 
 }

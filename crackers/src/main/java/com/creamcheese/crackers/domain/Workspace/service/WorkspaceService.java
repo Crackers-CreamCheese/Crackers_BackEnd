@@ -18,8 +18,8 @@ import com.creamcheese.crackers.global.exception.CustomException.WorkspaceNotFou
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -66,16 +66,19 @@ public class WorkspaceService {
 
 	}
 
+	@Transactional(readOnly = true)
 	public Category findByCategoryId(Integer id) {
 		return categoryRepository.findById(id)
 				.orElseThrow(CategoryNotFoundException::new);
 	}
 
+	@Transactional(readOnly = true)
 	public Workspace findByWorkspaceId(Integer id) {
 		return workspaceRepository.findById(id)
 				.orElseThrow(WorkspaceNotFoundException::new);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Workspace> findWorkspaceByAccount(Account account) {
 		List<Workspace> workspaces = workspaceRepository.findByAccount(account);
 		if (workspaces == null) {
